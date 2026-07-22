@@ -8,7 +8,7 @@ Hi, my name is Wayne Altuama. I'm a recent Algonquin College graduate and a Comp
 | Host                           | Role                       | Specs                                               |
 | ------------------------------ | -------------------------- | --------------------------------------------------- |
 | `pve.lab` (Dell OptiPlex 7040) | Primary Proxmox hypervisor | Intel i7-6700, 32GB DDR4, 1TB SATA SSD              |
-| pve2.lab (Dell OptiPlex 7020)  | Secondary Proxmox node     | Intel i7 (DDR3 gen), 32GB DDR3, 512GB SSD, GTX 1650 |
+| `pve2.lab` (Dell OptiPlex 7020)  | Secondary Proxmox node     | Intel i7 (DDR3 gen), 32GB DDR3, 512GB SSD, GTX 1650 |
 | External SSD                   | Backup target              | 512GB                                               |
 
 All hosts sit behind Tailscale, no ports forwarded to the internet.
