@@ -19,7 +19,7 @@ A small enterprise topology built to practice dual-stack (IPv4/IPv6) addressing,
 PC → CORE → (dual redundant links) → EDGE → WAN cloud → TFTP server
 ```
 
-[Topology](./Figures/Topology.png)
+![Network Topology](./Figures/Topology.png)
 
 ### Addressing Scheme
 
