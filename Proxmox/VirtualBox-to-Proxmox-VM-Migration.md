@@ -167,6 +167,7 @@ Using the Proxmox web interface or command-line:
 2. Select the imported `.img` file from storage
 3. Ensure correct bus type (e.g., SCSI or IDE) matches the original VM configuration
 4. Save changes
+
    ![VM Hardware showing imported disk added to VM](./Figures/Import-Disk.png)
 
 **Step 4: Adjust Boot Order**
