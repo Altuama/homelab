@@ -19,7 +19,7 @@ All hosts sit behind Tailscale, no ports forwarded to the internet.
 | ----------------------------------- | -------- | ------------------------------------------------ |
 | [Proxmox Virtualization Server Setup](./Proxmox/Proxmox-Cluster.md) | Complete | Proxmox VE                                       |
 | VirtualBox to Proxmox Migration     | Complete | Proxmox, VirtualBox                              |
-| Self-Hosted Obsidian Vault Sync     | Complete | CouchDB, Self-hosted LiveSync, Tailscale, Docker |
+| [Self-Hosted Obsidian Vault Sync](./Self-Hosted-Obsidian-Vault-Sync.md)     | Complete | CouchDB, Self-hosted LiveSync, Tailscale, Docker |
 | VirtualBox to Proxmox VM Migration  | Complete | VirtualBox, VBoxManage, Proxmox                  |
 | [2-Node Proxmox Cluster](./Proxmox/Proxmox-Cluster.md)              | Complete | Proxmox VE                                       |
 
