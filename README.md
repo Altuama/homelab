@@ -6,9 +6,8 @@ Hi, my name is Wayne Altuama. I'm a recent Algonquin College graduate and a Comp
 | Project                                                               | Stack                                            |
 | --------------------------------------------------------------------- | ------------------------------------------------ |
 | [Proxmox Virtualization Server Setup](Proxmox-Cluster.md)             | Proxmox VE                                       |
-| VirtualBox to Proxmox Migration                                       | Proxmox, VirtualBox                              |
+| VirtualBox to Proxmox Migration                                       | Proxmox, VirtualBox, VBoxManage                  |
 | [Self-Hosted Obsidian Vault Sync](Self-Hosted-Obsidian-Vault-Sync.md) | CouchDB, Self-hosted LiveSync, Tailscale, Docker |
-| VirtualBox to Proxmox VM Migration                                    | VirtualBox, VBoxManage, Proxmox                  |
 | [2-Node Proxmox Cluster](Proxmox-Cluster.md)                          | Proxmox VE                                       |
 ### The Lab
 
