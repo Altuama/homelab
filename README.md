@@ -29,7 +29,7 @@ _All hosts sit behind Tailscale, no ports forwarded to the internet._
 | [Linux Network Services](./Algonquin/Linux-Network-Services.md)                         | RHEL, Bash, BIND DNS, NFS, Samba, SSH, iptables, VMware                                                                    |
 | Malware Traffic Analysis - Pushdo Trojan                                                | Security Onion, Sguil, Kibana, Wireshark, NetworkMiner, VirusTotal, MITRE ATT&CK, VirtualBox                               |
 | Enterprise MSP Project                                                                  | Proxmox, Windows Server, Ubuntu, VPN, Veeam, LDAP, Active Directory, TrueNAS, DNS, HTTPS, DMZ, DHCP, RDP, SSH, iSCSI, IPMI |
-| Cloud Helpdesk Ticketing System                                                         | Spiceworks, Cloud Hosted, Email Authentication                                                                             |
+| [Cloud Helpdesk Ticketing System](./Algonquin/Cloud-Helpdesk-Ticketing-System.md)       | Spiceworks, Cloud Hosted, Email Authentication                                                                             |
 
 ## Skills Demonstrated
 
