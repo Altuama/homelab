@@ -21,7 +21,6 @@ A small enterprise topology built to practice dual-stack (IPv4/IPv6) addressing,
 - [Key Takeaways](#key-takeaways)
 - [Troubleshooting Reference](#troubleshooting-reference)
 - [Lab Completion Checklist](#lab-completion-checklist)
-- [Corrections Made During Review](#corrections-made-during-review)
 
 ---
 

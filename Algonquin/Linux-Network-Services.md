@@ -24,7 +24,6 @@ A comprehensive Linux server infrastructure lab featuring multiple network servi
 - [Key Takeaways](#key-takeaways)
 - [Troubleshooting Reference](#troubleshooting-reference)
 - [Completion Checklist](#completion-checklist)
-- [Corrections Made During Review](#corrections-made-during-review)
 
 ---
 

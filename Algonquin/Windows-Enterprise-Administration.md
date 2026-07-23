@@ -26,7 +26,6 @@ This models a scenario like two organizations needing mail interoperability with
 - [Key Takeaways](#key-takeaways)
 - [Troubleshooting Quick Reference](#troubleshooting-quick-reference)
 - [Final Verification Checklist](#final-verification-checklist)
-- [Corrections Made During Review](#corrections-made-during-review)
 
 ---
 

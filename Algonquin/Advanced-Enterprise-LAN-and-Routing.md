@@ -26,7 +26,6 @@ A comprehensive enterprise network implementation featuring switched LAN infrast
 - [Key Takeaways](#key-takeaways)
 - [Troubleshooting Reference](#troubleshooting-reference)
 - [Completion Checklist](#completion-checklist)
-- [Corrections Made During Review](#corrections-made-during-review)
 
 ---
 
