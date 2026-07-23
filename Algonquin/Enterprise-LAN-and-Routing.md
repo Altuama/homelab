@@ -13,6 +13,18 @@ A small enterprise topology built to practice dual-stack (IPv4/IPv6) addressing,
 
 ---
 
+## Table of Contents
+
+- [Topology](#topology)
+- [Skills Demonstrated](#skills-demonstrated)
+- [Implementation Steps](#implementation-steps)
+- [Key Takeaways](#key-takeaways)
+- [Troubleshooting Reference](#troubleshooting-reference)
+- [Lab Completion Checklist](#lab-completion-checklist)
+- [Corrections Made During Review](#corrections-made-during-review)
+
+---
+
 ## Topology
 
 ```
@@ -21,9 +33,26 @@ PC → CORE → (dual redundant links) → EDGE → WAN cloud → TFTP server
 
 ![Topology.png](./Figures/Topology.png)
 
+A text-native version, useful anywhere the image doesn't load (e.g. viewing raw markdown):
+
+```mermaid
+flowchart LR
+    PC["PC<br/>10.13.2.10/24"]
+    CORE["CORE<br/>Lo10: 10.13.100.2"]
+    EDGE["EDGE<br/>Lo10: 10.13.100.1"]
+    WAN((WAN Cloud))
+    TFTP["TFTP Server"]
+
+    PC --- CORE
+    CORE ===|"Link 1, Gi0/1 - cost 10 (primary)"| EDGE
+    CORE -.-|"Link 2, Gi0/2 - cost 20 (backup)"| EDGE
+    EDGE --- WAN
+    WAN --- TFTP
+```
+
 ### Addressing Scheme
 
-**Convention:** Last octet of every CORE interface is `2` (its device ID); every EDGE interface is `1`. `U` = student ID (13 in this lab).
+**Convention:** Last octet of every CORE interface is `2` (its device ID); every EDGE interface is `1`. `U` = student ID (13 in this lab); external-facing addresses use `U` as the host identifier instead.
 
 | Device | Interface | IPv4 | IPv6 |
 | :----- | :-------- | :--- | :--- |
@@ -109,23 +138,32 @@ line vty 0 4
 
 ### 2. OSPFv2 (IPv4 Dynamic Routing)
 
-#### Enable OSPF on CORE
+#### Enable the OSPF Process
 
+On CORE:
 ```
 router ospf 1
  router-id 10.13.100.2
- default-information originate
  passive-interface GigabitEthernet0/0
 ```
 
+On EDGE:
+```
+router ospf 1
+ router-id 10.13.100.1
+ default-information originate
+```
+
 #### Enable OSPF on Participating Interfaces
+
+Applied on every interface **except** EDGE's WAN-facing Gi0/0 — that link leads outside the routing domain and gets a default route instead.
 
 ```
 interface GigabitEthernet0/1
  ip ospf 1 area 0
 ```
 
-Enable on every interface **except** EDGE's WAN-facing Gi0/0—that link leads outside the routing domain and gets a default route instead.
+Repeat for: CORE Gi0/0, Gi0/1, Gi0/2; EDGE Gi0/1, Gi0/2.
 
 #### Default Route on EDGE
 
@@ -133,7 +171,7 @@ Enable on every interface **except** EDGE's WAN-facing Gi0/0—that link leads o
 ip route 0.0.0.0 0.0.0.0 203.0.113.1
 ```
 
-> **Critical:** `default-information originate` under the OSPF process is required to propagate this static default into the OSPF domain. Without it, the route stays local to EDGE and downstream routers won't learn it.
+> **Critical:** `default-information originate` under EDGE's OSPF process is required to propagate this static default into the OSPF domain. Without it — or if it ends up on the wrong router — the route stays local to EDGE and downstream routers like CORE won't learn it.
 
 #### Verification Commands
 
@@ -205,6 +243,7 @@ Traffic should take the **lower-cost path** (Link 1 via Gi0/1 with cost 10).
 
 #### Step 2: Simulate Failure
 
+On CORE:
 ```
 interface GigabitEthernet0/1
  shutdown
@@ -264,7 +303,7 @@ ipv6 route 2001:FAB:203::/64 GigabitEthernet0/1 FE80::1
 | :------ | :------ |
 | `show ipv6 route` | Verify IPv6 routing table |
 | `ping ipv6 <ipv6-address>` | Test IPv6 connectivity |
-| `traceroute <ipv6-address>` | Verify path selection |
+| `traceroute ipv6 <ipv6-address>` | Verify path selection |
 
 ---
 
@@ -273,13 +312,14 @@ ipv6 route 2001:FAB:203::/64 GigabitEthernet0/1 FE80::1
 #### Step 1: Establish Baseline
 
 ```
-traceroute 2001:FAB:203::13
+traceroute ipv6 2001:FAB:203::13
 ```
 
 Traffic should take **Link 1** (primary static route).
 
 #### Step 2: Simulate Failure
 
+On CORE:
 ```
 interface GigabitEthernet0/1
  shutdown
@@ -326,7 +366,7 @@ This captures show command output directly to a file on the TFTP server without 
 
 | Concept | Lesson |
 | :------ | :----- |
-| **default-information originate** | Easy to forget; its absence is invisible until you check a downstream router's routing table |
+| **default-information originate** | Must live on the router that actually owns the default route (here, EDGE, not CORE) — its absence, or misplacement, is invisible until you check a downstream router's routing table |
 | **Reference Bandwidth** | Only matters once your fastest links get cheap enough to look identical to OSPF's default math |
 | **Interface Cost** | Lower cost = preferred path; symmetric cost settings ensure consistent behavior |
 | **Floating Static Routes** | Clean, protocol-independent redundancy for smaller networks |
@@ -341,29 +381,39 @@ This captures show command output directly to a file on the TFTP server without 
 | :---- | :----------- | :-- |
 | OSPF neighbor not forming | Hello/dead timer mismatch | Match timers on both ends |
 | Route not in routing table | Area mismatch or passive interface | Check area config; remove passive if needed |
-| Default route missing on CORE | `default-information originate` missing | Add under OSPF process |
-| IPv6 failover not working | Primary route still in routing table | Check next-hop reachability; AD 130 may not be high enough if primary AD > 130 |
+| Default route missing on CORE | `default-information originate` missing or on the wrong router | Add under EDGE's OSPF process — the router that actually holds the static default |
+| IPv6 failover not working | Primary route still preferred | The backup only activates once the primary route's next-hop is completely unreachable, not just degraded |
 | Backup route not installing | Primary route still considered valid | Primary route's next-hop must be completely unreachable |
 
 ---
 
 ## Lab Completion Checklist
 
-- [ ] IPv4/IPv6 addressing configured on all interfaces
-- [ ] SSH enabled, Telnet disabled
-- [ ] OSPFv2 configured with router ID
-- [ ] OSPF neighbors established
-- [ ] Default route propagated via OSPF
-- [ ] Reference bandwidth tuned (10000 Mbps)
-- [ ] Interface costs set (Link 1: 10, Link 2: 20)
-- [ ] IPv4 failover tested and working
-- [ ] IPv6 static primary route configured
-- [ ] IPv6 floating backup route configured (AD 130)
-- [ ] IPv6 failover tested and working
-- [ ] Configuration backed up to TFTP server
+- [x] IPv4/IPv6 addressing configured on all interfaces
+- [x] SSH enabled, Telnet disabled
+- [x] OSPFv2 configured with router ID
+- [x] OSPF neighbors established
+- [x] Default route propagated via OSPF
+- [x] Reference bandwidth tuned (10000 Mbps)
+- [x] Interface costs set (Link 1: 10, Link 2: 20)
+- [x] IPv4 failover tested and working
+- [x] IPv6 static primary route configured
+- [x] IPv6 floating backup route configured (AD 130)
+- [x] IPv6 failover tested and working
+- [x] Configuration backed up to TFTP server
 
 ---
 
-**Environment:** [GNS3 / EVE-NG / Physical Hardware]
+## Corrections Made During Review
+
+1. **`default-information originate` was on the wrong router.** It appeared under CORE's OSPF process, but CORE has no default route of its own — only EDGE does. Moved it to EDGE's OSPF process, where the static default route actually lives. As originally written, CORE also wouldn't have been able to reach the TFTP server in Section 7, since that route is CORE's only path outside the internal address space.
+2. **EDGE's OSPF process block wasn't shown explicitly.** Added it alongside CORE's for symmetry (router ID `10.13.100.1`, matching EDGE's loopback).
+3. **`traceroute` for IPv6 destinations now uses the explicit `ipv6` keyword**, matching the convention already used for `ping ipv6 <address>` elsewhere in the doc.
+4. **IPv6 failover troubleshooting row reworded.** The original hedge ("AD 130 may not be high enough if primary AD > 130") describes a scenario that can't actually happen here, since the primary static route uses the default AD of 1. Replaced with the failure mode that applies in this lab.
+5. **Completion checklist boxes checked.** They were all unchecked despite the write-up describing every item as implemented — uncheck anything that isn't actually done yet.
+
+---
+
+**Environment:** [Physical Hardware]
 
 ---
