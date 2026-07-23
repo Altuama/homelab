@@ -21,15 +21,15 @@ _All hosts sit behind Tailscale, no ports forwarded to the internet._
 
 # Algonquin College Projects
 
-| Project                                                                                 | Stack                                                                                                                      |
-| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| [Advanced Enterprise LAN & Routing](./Algonquin/Advanced-Enterprise-LAN-and-Routing.md) | Cisco IOS, Packet Tracer, IPv4, OSPFv2, BGPv4, RSTP, LACP                                                                  |
-| [Enterprise LAN & Routing](./Algonquin/Enterprise-LAN-and-Routing.md)                   | Cisco IOS, IPv4, IPv6, OSPFv2, Routing, SSH, TFTP                                                                          |
-| [Windows Enterprise Administration](./Algonquin/Windows-Enterprise-Administration.md)   | Windows Server 2022, Exchange Server 2019, Active Directory, DNS, OWA, Thunderbird, VMware                                 |
-| [Linux Network Services](./Algonquin/Linux-Network-Services.md)                         | RHEL, Bash, BIND DNS, NFS, Samba, SSH, iptables, VMware                                                                    |
-| Malware Traffic Analysis - Pushdo Trojan                                                | Security Onion, Sguil, Kibana, Wireshark, NetworkMiner, VirusTotal, MITRE ATT&CK, VirtualBox                               |
-| Enterprise MSP Project                                                                  | Proxmox, Windows Server, Ubuntu, VPN, Veeam, LDAP, Active Directory, TrueNAS, DNS, HTTPS, DMZ, DHCP, RDP, SSH, iSCSI, IPMI |
-| [Cloud Helpdesk Ticketing System](./Algonquin/Cloud-Helpdesk-Ticketing-System.md)       | Spiceworks, Cloud Hosted, Email Authentication                                                                             |
+| Project                                                                                           | Stack                                                                                                                      |
+| ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| [Advanced Enterprise LAN & Routing](./Algonquin/Advanced-Enterprise-LAN-and-Routing.md)           | Cisco IOS, Packet Tracer, IPv4, OSPFv2, BGPv4, RSTP, LACP                                                                  |
+| [Enterprise LAN & Routing](./Algonquin/Enterprise-LAN-and-Routing.md)                             | Cisco IOS, IPv4, IPv6, OSPFv2, Routing, SSH, TFTP                                                                          |
+| [Windows Enterprise Administration](./Algonquin/Windows-Enterprise-Administration.md)             | Windows Server 2022, Exchange Server 2019, Active Directory, DNS, OWA, Thunderbird, VMware                                 |
+| [Linux Network Services](./Algonquin/Linux-Network-Services.md)                                   | RHEL, Bash, BIND DNS, NFS, Samba, SSH, iptables, VMware                                                                    |
+| [Malware Traffic Analysis - Pushdo Trojan](./Algonquin/Malware-Traffic-Analysis-Pushdo-Trojan.md) | Security Onion, Sguil, Kibana, Wireshark, NetworkMiner, VirusTotal, MITRE ATT&CK, VirtualBox                               |
+| [Enterprise MSP Project](./Algonquin/Emerging-Tech-MSP.md)                                        | Proxmox, Windows Server, Ubuntu, VPN, Veeam, LDAP, Active Directory, TrueNAS, DNS, HTTPS, DMZ, DHCP, RDP, SSH, iSCSI, IPMI |
+| [Cloud Helpdesk Ticketing System](./Algonquin/Cloud-Helpdesk-Ticketing-System.md)                 | Spiceworks, Cloud Hosted, Email Authentication                                                                             |
 
 ## Skills Demonstrated
 
